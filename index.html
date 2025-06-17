@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" sizes="32x32" href="settings_images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cantora+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Type Quiz</title>
+</head>
+<body>
+    <div class="side-container" id="left-container">
+        <div id="genSelectContainer">
+            <h2 class="settingsTitleText">Category</h2>
+            <div id="selectionButtons">
+                <button class="category-btn" data-index="0" data-category="superEffectiveAgainst">Super Effective</button>
+                <button class="category-btn" data-index="1" data-category="notVeryEffectiveAgainst">Not Very Effective</button>
+                <button class="category-btn" data-index="2" data-category="noEffectAgainst">No Effect</button>
+                <button class="category-btn" data-index="3" data-category="weakTo">Weak To</button>
+                <button class="category-btn" data-index="4" data-category="resistantTo">Resistant To</button>
+                <button class="category-btn" data-index="5" data-category="immuneTo">Immune To</button>
+                <button class="category-btn" data-category="random">Random</button>
+            </div>
+        </div>
+    </div>
+    <div class="mainQuiz">
+        <h1>Pok&eacute;mon Types</h1>
+        <div id="mainHeader">
+            <div id="activeTypeImg" class="type-btn">
+                <img id="typeImage" src="" alt="Image Not Found" />
+            </div>
+            <div id="activeType"></div>
+            <div id="activeGuessSlots">
+            </div>
+        </div>
+
+        <div class="type-container">
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Bug" id="bug" />
+                <img src="TypeIcons/Bug.png" alt="Bug Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Dark" id="dark" />
+                <img src="TypeIcons/Dark.png" alt="Dark Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Dragon" id="dragon" />
+                <img src="TypeIcons/Dragon.png" alt="Dragon Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Electric" id="electric" />
+                <img src="TypeIcons/Electric.png" alt="Electric Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Fairy" id="fairy" />
+                <img src="TypeIcons/Fairy.png" alt="Fairy Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Fighting" id="fighting" />
+                <img src="TypeIcons/Fighting.png" alt="Fighting Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Fire" id="fire" />
+                <img src="TypeIcons/Fire.png" alt="Fire Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Flying" id="flying" />
+                <img src="TypeIcons/Flying.png" alt="Flying Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Ghost" id="ghost" />
+                <img src="TypeIcons/Ghost.png" alt="Ghost Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Grass" id="grass" />
+                <img src="TypeIcons/Grass.png" alt="Grass Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Ground" id="ground" />
+                <img src="TypeIcons/Ground.png" alt="Ground Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Ice" id="ice" />
+                <img src="TypeIcons/Ice.png" alt="Ice Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Normal" id="normal" />
+                <img src="TypeIcons/Normal.png" alt="Normal Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Poison" id="poison" />
+                <img src="TypeIcons/Poison.png" alt="Poison Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Psychic" id="psychic" />
+                <img src="TypeIcons/Psychic.png" alt="Psychic Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Rock" id="rock" />
+                <img src="TypeIcons/Rock.png" alt="Rock Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Steel" id="steel" />
+                <img src="TypeIcons/Steel.png" alt="Steel Type" />
+            </label>
+            <label class="type-btn">
+                <input type="checkbox" name="type" value="Water" id="water" />
+                <img src="TypeIcons/Water.png" alt="Water Type" />
+            </label>
+        </div>
+
+        <button id="submitAnswer">SUBMIT</button>
+        <div id="resultBox">
+            <img id="resultTypeImage" src="" alt="Type" />
+            <div class="result-text" id="resultText"></div>
+            <div class="result-score" id="resultScore"></div>
+        </div>
+    </div>
+    <div class="side-container" id="right-container">
+        <div id="scoreData">
+            <h2 id="scoreTitle" class="settingsTitleText">Score</h2>
+            <div id="current-score-container" class="sidebox">
+                <h4 id="currentScoreTitle" class="settingsSubtitleText">Current</h4>
+                <h1 id="score" class="settingsText">0</h1>
+            </div>
+            <div id="best-score-container" class="sidebox">
+                <h4 id="bestScoreTitle" class="settingsSubtitleText">Best</h4>
+                <h1 id="bestScore" class="settingsText">0</h1>
+            </div>
+        </div>
+        <div id="streakData">
+            <h2 id="streakTitle" class="settingsTitleText">Streak</h2>
+            <div id="current-streak-container" class="sidebox">
+                <h4 id="currentstreakTitle" class="settingsSubtitleText">Current</h4>
+                <h1 id="streak" class="settingsText">0</h1>
+            </div>
+            <div id="best-streak-container" class="sidebox">
+                <h4 id="beststreakTitle" class="settingsSubtitleText">Best</h4>
+                <h1 id="bestStreak" class="settingsText">0</h1>
+            </div>
+        </div>
+        <button id="darkModeToggle" class="settingsButton">Toggle Dark Mode</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,413 @@
+/* UNIVERSAL STYLES */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin-top: 5%;
+    font-family: 'Cantora One', 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    top: 10%;
+    transform: translateY(0);
+    /* background-color: #f7f7f7; */
+}
+
+h1, h2, h3, h4 {
+    text-align: center;
+    font-family: 'Cantora One', 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+}
+
+/* DARK MODE */
+@media (prefers-color-scheme:dark) {
+}
+
+@media (max-width: 1080px) {
+    body {
+        align-items: flex-start;
+        justify-content: center;
+    }
+}
+
+body.dark-mode {
+    color: #e7e7e7;
+    background-color: #252630;
+}
+
+body.dark-mode #submitAnswer {
+    background-color: #e7e7e7;
+    color: #252630;
+}
+
+body.dark-mode #submitAnswer:hover {
+    background-color: #bdbdbd;
+}
+
+body.dark-mode .type-btn input[type="checkbox"]:checked + img,
+body.dark-mode .type-btn img:focus {
+    outline: 3px solid rgba(255, 255, 255, 0.9); /* This makes the outline white for dark mode */
+}
+
+body.dark-mode .mainQuiz {
+    background-color: #3a404a;
+}
+
+body.dark-mode .sidebox {
+    background-color: #3a3841;
+}
+
+/* CONTAINER STYLES */
+
+.mainQuiz {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ccc;
+    border-radius: 10px;
+    padding: 1%;
+    width: 450px;
+    height: 650px;
+}
+
+#activeType {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    margin-bottom: 1%;
+    font-size: 1.4em;
+}
+
+#typeImage {
+    margin: 10px auto;
+}
+
+
+/* SETTINGS BUTTONS */
+/* Toggle Dark Mode */
+#darkModeToggle {
+    margin-top: 5px;
+    display: block;
+}
+
+/* Submit Button */
+
+#submitAnswer {
+    margin-top: 2%;
+    padding: 2% 4%;
+    font-size: 1.8em;
+    border: none;
+    /* border-radius: 5px; */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    background-color: #3a404a;
+    color: #ffffff;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    font-family: 'Cantora One', 'Roboto', sans-serif;
+    letter-spacing: 1px;
+}
+
+#submitAnswer:hover {
+    background-color: #272b33;
+    transform: scale(1.05);
+}
+
+#submitAnswer:active {
+    transform: scale(0.95);
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+}
+
+/* RESULT */
+
+#resultBox {
+    position: absolute;
+    top: 100%; /* sit just below .mainQuiz */
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 6px; /* small gap from quiz */
+    width: 380px; /* slightly wider than quiz */
+    background: #3a404a;
+    padding: 8px 12px; /* tighter vertical padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+
+    /* slightly larger icon, more room */
+    #resultBox img {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        margin-right: 12px;
+        flex-shrink: 0;
+    }
+
+/* text wraps if long */
+.result-text {
+    flex: 1;
+    margin: 0 8px;
+    font-family: 'Cantora One', sans-serif;
+    font-size: 1em;
+    word-break: break-word;
+    text-align: center;
+}
+
+/* score */
+.result-score {
+    font-family: 'Cantora One', sans-serif;
+    font-size: 1.6em;
+    flex-shrink: 0;
+}
+
+/* colours */
+.result-text .correct {
+    color: #6dbf4b;
+    font-weight: bold;
+}
+
+.result-text .incorrect {
+    color: #f06d6d;
+    font-weight: bold;
+}
+
+/* dark-mode */
+body.dark-mode #resultBox {
+    background: #2b2f36;
+}
+
+/* TYPES */
+
+/* Side Container */
+.side-container {
+    margin-top: 10px;
+}
+
+#left-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px; 
+}
+
+/* Header inside left panel */
+#genSelectContainer h2 {
+  margin-bottom: 8px;
+  font-size: 1.2em;
+}
+
+/* Stack buttons vertically */
+#selectionButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Style each category button */
+#selectionButtons .category-btn {
+  padding: 8px 12px;
+  font-family: 'Cantora One', sans-serif;
+  font-size: 0.9em;
+  border: none;
+  border-radius: 6px;
+  background-color: #3a404a;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Hover & active */
+#selectionButtons .category-btn:hover {
+  background-color: #272b33;
+}
+#selectionButtons .category-btn:active {
+  transform: scale(0.97);
+}
+
+/* Dark-mode override */
+body.dark-mode #selectionButtons .category-btn {
+  background-color: #919191;
+  color: #252630;
+}
+body.dark-mode #selectionButtons .category-btn:hover {
+  background-color: #bdbdbd;
+}
+
+#left-container div {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+#right-container div {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.sidebox {
+    margin-bottom: 15%;
+    background-color: #919191;
+    padding: 2% 1% 2% 1%;
+}
+
+#genSelectContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    align-items: center;
+    margin-bottom: 0.5%;
+    padding: 1% 0.5% 1% 0.5%;
+}
+
+#selectionButtons {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+}
+
+.settingsButton {
+    padding: 1% 2%;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Type Container */
+.answerImage {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin-top: 0.5%;
+}
+
+.answerImage > img, .answerImage > div {
+    height: 20px;
+    object-fit: cover;
+}
+
+.type-container {
+    margin: 1%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+#activePokemon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0px 1% 2% 1%;
+}
+
+.typeSelectedButton input[type="checkbox"] {
+    display: none;
+}
+
+/* Type Buttons */
+.type-btn input[type="checkbox"] {
+    display: none;
+}
+
+.type-btn img {
+    display: block;
+    width: 135px;
+    height: 53px;
+    transition: outline 0.2s ease;
+    outline: 3px solid rgba(0, 0, 0, 0.0);
+}
+
+.type-btn input[type="checkbox"]:checked + img {
+    outline: 3px solid rgba(0, 0, 0, 0.9);
+}
+
+.type-btn img:focus {
+    outline: 3px solid rgba(0,0,0,0.9);
+}
+
+
+/* Generation Items */
+#genHeader {
+    text-align: center;
+    font-size: 1em;
+}
+
+.gen-item {
+    display: flex;
+    align-items: center;
+}
+
+    .gen-item input[type="checkbox"] {
+        margin-left: 0;
+    }
+
+/* NAVIGATION STYLES */
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 24px;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #3498db;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #2980b9;
+}
+
+/* FOOTER STYLES */
+
+.footer {
+    margin-top: 2%;
+    text-align: center;
+    color: #7f8c8d;
+}
+
+.footer a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #2980b9;
+}
