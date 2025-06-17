@@ -78,7 +78,7 @@ async function loadType(currentType) {
 // ----------------- Data Fetching -----------------
 async function fetchAllTypes() {
     try {
-        const response = await fetch('/pokemon_data.json');
+        const response = await fetch('pokemon_data.json');
         if (!response.ok) throw new Error('Network response was not ok');
         const data = await response.json();
         allValidTypes = data.types.map(type => type);
