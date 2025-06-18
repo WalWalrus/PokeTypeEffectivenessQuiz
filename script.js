@@ -69,11 +69,31 @@ async function checkForEmptyArrays() {
 }
 
 async function loadType(currentType) {
-    correctTypes = currentType[activeCategory].filter(type => type.length > 0);
+    // 1. build correctTypes & show the icon
+    correctTypes = currentType[activeCategory].filter(t => t);
     document.getElementById('typeImage').src = `TypeIcons/${currentType.name}.png`;
-    const amountModifier = correctTypes.length > 1 ? `types (${correctTypes.length}) are` : 'type (1) is';
-    document.getElementById('activeType').innerText = `What ${amountModifier} ${currentType.name} ${typeDescriptions[activeCategory]}?`;
+
+    const count = correctTypes.length;
+    const plural = count > 1;
+
+    let question;
+    const noun = plural ? 'types' : 'type';
+    const countText = plural ? ` (${count})` : ' (1)';
+
+    if (activeCategory === 'noEffectAgainst') {
+        // “Which type(s) does/do X have no effect against?”
+        const verb = plural ? 'do' : 'does';
+        question = `Which ${noun}${countText} ${verb} ${currentType.name} have no effect against?`;
+    } else {
+        // “Which type(s) (n) is/are X super effective against?” etc.
+        const verb = plural ? 'are' : 'is';
+        question = `Which ${noun}${countText} ${verb} ${currentType.name} `
+            + `${typeDescriptions[activeCategory]}?`;
+    }
+
+    document.getElementById('activeType').innerText = question;
 }
+
 
 // ----------------- Data Fetching -----------------
 async function fetchAllTypes() {
@@ -122,20 +142,21 @@ function initializeCategoryButtons() {
         btn.addEventListener('click', async () => {
             const cat = btn.dataset.category;
             if (cat === 'random') {
-                // enter random‐mode
                 isRandomMode = true;
                 randomQueue = shuffle(Object.keys(typeProperties).map(k => parseInt(k)));
                 randomQueueIndex = 0;
                 activeCategoryNum = randomQueue[0];
                 activeCategory = typeProperties[activeCategoryNum];
             } else {
-                // regular single‐category mode
                 isRandomMode = false;
                 activeCategory = cat;
                 activeCategoryNum = parseInt(btn.dataset.index, 10);
             }
+            //Hide result box
+            document.getElementById('resultTypeImage').src = '';
+            const resultBox = document.getElementById('resultBox');
+            resultBox.style.display = 'none';
 
-            // reset state & UI
             selectedCheckboxes = [];
             submittedTypes = [];
             score = 0;
@@ -157,6 +178,10 @@ document.getElementById('submitAnswer').addEventListener('click', async function
 });
 
 async function submitAnswers(checkboxes) {
+    //Show result box
+    const resultBox = document.getElementById('resultBox');
+    resultBox.style.display = 'flex';
+
     let points = 0;
     submittedTypes = checkboxes.map(cb => cb.value).sort();
     correctTypes.sort();
@@ -164,6 +189,9 @@ async function submitAnswers(checkboxes) {
         if (correctTypes.includes(cb.value)) points++;
         cb.checked = false;
     });
+
+    console.log(points, submittedTypes.length);
+    updateScore(points, points === submittedTypes.length);
 
     document.getElementById('resultTypeImage').src =
         `TypeIcons/${currentlyActiveType.name}.png`;
@@ -205,7 +233,17 @@ async function resetVariables() {
 }
 
 // ----------------- Score -----------------
-function updateScore() {
+function updateScore(roundScore = 0, continueStreak = false) {
+    score += roundScore;
+    if (score > bestScore) { bestScore = score; }
+
+
+    streak = continueStreak ? ++streak : 0;
+    if (streak > bestStreak) { bestStreak = streak; }
+
+    localStorage.setItem('bestScore', bestScore);
+    localStorage.setItem('bestStreak', bestStreak);
+
     document.getElementById('score').innerText = score;
     document.getElementById('bestScore').innerText = bestScore;
     document.getElementById('streak').innerText = streak;
@@ -214,6 +252,11 @@ function updateScore() {
 
 // ----------------- Initialization -----------------
 window.addEventListener('DOMContentLoaded', async () => {
+    //Hide result box
+    document.getElementById('resultTypeImage').src = '';
+    const resultBox = document.getElementById('resultBox');
+    resultBox.style.display = 'none';
+
     // Set initial category
     activeCategory = typeProperties[activeCategoryNum];
 

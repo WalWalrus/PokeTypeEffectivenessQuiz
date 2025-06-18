@@ -84,17 +84,34 @@ body.dark-mode .sidebox {
 }
 
 #activeType {
-    padding: 10px;
-    border: 1px solid #ccc;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    margin-bottom: 1%;
-    font-size: 1.4em;
+    border: 2px solid #444;
+    border-radius: 6px;
+    padding: 0.5em 1em;
+    min-height: calc(1.2em * 2 + 1em);
+    box-sizing: border-box;
+    margin-bottom: 1em; 
+}
+
+body:not(.dark-mode) #activeType {
+    background: #fff;
+    color: #222;
+    border-color: #888;
+}
+
+body.dark-mode #activeType {
+    background: transparent;
+    color: #fff;
+    border-color: #fff;
 }
 
 #typeImage {
     margin: 10px auto;
 }
-
 
 /* SETTINGS BUTTONS */
 /* Toggle Dark Mode */
@@ -139,50 +156,46 @@ body.dark-mode .sidebox {
 }
 
 /* RESULT */
-
 #resultBox {
     position: absolute;
-    top: 100%; /* sit just below .mainQuiz */
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 6px; /* small gap from quiz */
-    width: 380px; /* slightly wider than quiz */
-    background: #3a404a;
-    padding: 8px 12px; /* tighter vertical padding */
+    margin-top: 6px;
+    width: 450px;
+    background: #ccc;
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 2px 8px rgba(0,0,0,0.4);
     z-index: 10;
+    border-radius: 10px;
 }
 
-    /* slightly larger icon, more room */
-    #resultBox img {
-        width: 60px;
-        height: 60px;
-        object-fit: contain;
-        margin-right: 12px;
-        flex-shrink: 0;
-    }
+#resultBox img {
+    flex: 0 0 120px;
+    width: 120px;
+    height: 80px;
+    object-fit: contain;
+}
 
-/* text wraps if long */
 .result-text {
     flex: 1;
-    margin: 0 8px;
+    margin: 0 16px;
     font-family: 'Cantora One', sans-serif;
-    font-size: 1em;
+    font-size: 1.2em;
     word-break: break-word;
     text-align: center;
 }
 
-/* score */
 .result-score {
+    flex: 0 0 120px;
+    text-align: center;
     font-family: 'Cantora One', sans-serif;
-    font-size: 1.6em;
-    flex-shrink: 0;
+    font-size: 3.2em;
 }
 
-/* colours */
 .result-text .correct {
     color: #6dbf4b;
     font-weight: bold;
@@ -193,9 +206,8 @@ body.dark-mode .sidebox {
     font-weight: bold;
 }
 
-/* dark-mode */
 body.dark-mode #resultBox {
-    background: #2b2f36;
+    background: #3a404a;
 }
 
 /* TYPES */
@@ -232,8 +244,8 @@ body.dark-mode #resultBox {
   font-size: 0.9em;
   border: none;
   border-radius: 6px;
-  background-color: #3a404a;
-  color: #fff;
+  background-color: #ccc;
+  color: #000;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
